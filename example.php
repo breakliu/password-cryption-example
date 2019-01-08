@@ -52,16 +52,16 @@ function valid_keys($db_password, $instance_key_encode, $db_password_key_encode)
 
 # You May Need This Function : )
 function get_db_password($instance_key_encode, $db_password_key_encode) {
-    $db_password_key_2 = base64_decode($db_password_key_encode);
-    $instance_key_2 = base64_decode($instance_key_encode);
-    $db_password_2 = openssl_decrypt($db_password_key_2, __CIPHER__, $instance_key_2, $options=0, __IV__);
+    $db_password_key = base64_decode($db_password_key_encode);
+    $instance_key = base64_decode($instance_key_encode);
+    $db_password = openssl_decrypt($db_password_key, __CIPHER__, $instance_key, $options=0, __IV__);
 
 
-    if ( false === $db_password_2 ) {
+    if ( false === $db_password ) {
         die("openssl_decrypt failed!\n");
     }
 
-    return $db_password_2;
+    return $db_password;
 }
 
 $db_password = '12345678AbC'; # Your DB Password
